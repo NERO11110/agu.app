@@ -13,17 +13,21 @@
   * 実時間に基づいた動的生長計算アルゴリズム（ミニトマト、いちご、サニーレタス、バジル、ベビーリーフ）
   * 土壌水分ステータスの動的検知および自動給水シグナル送信機能
   * 収穫時の現地入場用暗証番号（パスコード）自動発行
+<img width="207" height="279" alt="farm" src="https://github.com/user-attachments/assets/b7c4c53e-4af3-43f3-8679-6ad1958a80e1" />
 
 * **🛒 ショップ**
   * 一般市場価格より約10%お得な価格設定の種・苗購入
   * 所持コイン（1 yen = 1 coin）によるリアルタイム決済
+<img width="206" height="278" alt="shop" src="https://github.com/user-attachments/assets/b81a67e8-f702-4a9e-b79d-8ca2909cafd4" />
 
 * **🎒 もちもの（インベントリ）**
   * 収穫した作物の管理一覧および現地パスコード確認
+<img width="209" height="274" alt="inv" src="https://github.com/user-attachments/assets/f1346d1d-54c6-47af-ba4c-93b45f67ee99" />
 
 * **💳 チャージ**
   * 500円〜10,000円の6段階定額チャージ
   * 誤操作を防ぐ最終確認モーダルダイアログ搭載
+<img width="225" height="276" alt="charge" src="https://github.com/user-attachments/assets/6f4b34eb-ec08-4aaf-b8ed-8d203dc8695c" />
 
 ---
 
