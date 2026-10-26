@@ -6,7 +6,7 @@ def apply_custom_css():
   st.markdown(
       """
     <!-- 丸ゴシックフォントの読み込み -->
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
     /* 全体背景：クリーンホワイト */
@@ -26,17 +26,32 @@ def apply_custom_css():
         font-family: 'Zen Maru Gothic', sans-serif !important;
     }
 
-    /* ★ スマホ画面でもカラムの縦並び（折り返し）を防止して強制2列表示にする設定 */
+    /* ★★★ スマホ（モバイル）での1列化を強力に打ち消すCSS ★★★ */
+    [data-testid="stColumn"] {
+        width: calc(50% - 6px) !important;
+        min-width: calc(50% - 6px) !important;
+        max-width: calc(50% - 6px) !important;
+        flex: 1 1 calc(50% - 6px) !important;
+    }
+
     [data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         gap: 12px !important;
+        width: 100% !important;
     }
-    [data-testid="stColumn"] {
-        width: 50% !important;
-        min-width: 0 !important;
-        flex: 1 1 50% !important;
+
+    /* 画面がどれだけ狭くても横並びを維持 */
+    @media (max-width: 640px) {
+        [data-testid="stColumn"] {
+            width: calc(50% - 6px) !important;
+            min-width: calc(50% - 6px) !important;
+            flex: 1 1 calc(50% - 6px) !important;
+        }
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: row !important;
+        }
     }
 
     /* 正方形ボタンのスタイリング */
@@ -52,11 +67,11 @@ def apply_custom_css():
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        padding: 8px !important;
+        padding: 6px !important;
         transition: all 0.2s ease-in-out !important;
     }
 
-    /* ホバー時の装飾 */
+    /* ホバー時 */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button:hover {
         border-color: #059669 !important;
         background-color: #ECFDF5 !important;
@@ -64,17 +79,17 @@ def apply_custom_css():
         transform: translateY(-2px) !important;
     }
 
-    /* ボタン内のテキスト（スマホ画面サイズに合わせて文字サイズを最適化） */
+    /* ボタン内のテキスト（スマホ画面サイズにぴったりフィット） */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button p {
         color: #111827 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
-        font-size: clamp(1.1rem, 4vw, 1.4rem) !important; /* スマホ画面では自動で程よく縮小 */
+        font-size: clamp(1.1rem, 4.5vw, 1.4rem) !important;
         font-weight: 900 !important;
-        line-height: 1.3 !important;
+        line-height: 1.2 !important;
         margin: 0 !important;
     }
 
-    /* 通常ボタンのスタイリング */
+    /* 通常ボタン（← ホームに戻る など） */
     .stButton > button {
         background-color: #FFFFFF !important;
         color: #111827 !important;
@@ -82,17 +97,13 @@ def apply_custom_css():
         border-radius: 12px !important;
         font-weight: 700 !important;
     }
-    .stButton > button:hover {
-        border-color: #059669 !important;
-        color: #059669 !important;
-    }
 
-    /* 全体コンテナの幅調整 */
+    /* コンテナの余白調整 */
     .block-container {
-        padding-top: 1.5rem !important;
+        padding-top: 1.2rem !important;
         padding-bottom: 2rem !important;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
         max-width: 520px !important;
     }
     </style>
