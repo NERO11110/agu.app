@@ -20,8 +20,30 @@ DB.init_db()
 # 共通CSSの適用
 style.apply_custom_css()
 
-# URLパラメータによるページ遷移の取得（デフォルトは home）
-current_page = st.query_params.get("page", "home")
+# --- ページパラメータ取得の安全化（新旧バージョン両対応） ---
+try:
+  # Streamlit 1.30+
+  if hasattr(st, "query_params"):
+    current_page = st.query_params.get("page", "home")
+  else:
+    # 古いバージョン
+    params = st.experimental_get_query_params()
+    current_page = params.get("page", ["home"])[0]
+except Exception:
+  current_page = "home"
+
+
+# ホームに戻る処理の関数
+def go_home():
+  try:
+    if hasattr(st, "query_params"):
+      st.query_params.clear()
+    else:
+      st.experimental_set_query_params()
+  except Exception:
+    pass
+  st.rerun()
+
 
 # ---------------------------------------------------------
 # メイン画面（ホーム：2x2グリッドナビゲーション）
@@ -122,24 +144,20 @@ if current_page == "home":
 # ---------------------------------------------------------
 elif current_page == "farm":
   if st.button("← ホームに戻る"):
-    st.query_params.clear()
-    st.rerun()
+    go_home()
   farm.show()
 
 elif current_page == "shop":
   if st.button("← ホームに戻る"):
-    st.query_params.clear()
-    st.rerun()
+    go_home()
   shop.show()
 
 elif current_page == "inv":
   if st.button("← ホームに戻る"):
-    st.query_params.clear()
-    st.rerun()
+    go_home()
   inv.show()
 
 elif current_page == "charge":
   if st.button("← ホームに戻る"):
-    st.query_params.clear()
-    st.rerun()
+    go_home()
   charge.show()
