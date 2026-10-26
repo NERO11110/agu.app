@@ -9,36 +9,61 @@ def apply_custom_css():
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
-    /* 全体背景：クリーンホワイト */
-    .stApp {
+    /* 1. アプリ全体：横スクロールを強制禁止し、縦スクロールのみ許可 */
+    html, body, .stApp, [data-testid="stAppViewContainer"] {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
         background-color: #FAFAFA !important;
         font-family: 'Zen Maru Gothic', -apple-system, sans-serif !important;
     }
 
-    /* 文字色・タイトル統一 */
+    /* 2. ヘッダー・タイトルの文字切れ防止＆上部余白の最適化 */
+    header[data-testid="stHeader"] {
+        background-color: transparent !important;
+    }
+    
+    .block-container {
+        padding-top: 1.0rem !important;  /* 上部余白を詰めてヘッダーの見切れを防止 */
+        padding-bottom: 2.0rem !important;
+        padding-left: 0.8rem !important;
+        padding-right: 0.8rem !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* タイトル（H1〜H3）の文字サイズ動的調整と折り返し許可 */
+    h1, h2, h3 {
+        color: #111827 !important;
+        font-weight: 900 !important;
+        font-family: 'Zen Maru Gothic', sans-serif !important;
+        word-break: break-word !important;  /* はみ出しによる見切れを防止 */
+        white-space: normal !important;
+        line-height: 1.3 !important;
+    }
+    
+    h1 { font-size: clamp(1.4rem, 5vw, 2.0rem) !important; }
+    h2 { font-size: clamp(1.2rem, 4.5vw, 1.6rem) !important; }
+    h3 { font-size: clamp(1.05rem, 4vw, 1.3rem) !important; }
+
+    /* 文字色・フォント統一 */
     body, p, span, div, label, .stMarkdown {
         color: #1F2937 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
     }
-    h1, h2, h3, h4, h5, h6 {
-        color: #111827 !important;
-        font-weight: 900 !important;
-        font-family: 'Zen Maru Gothic', sans-serif !important;
-    }
 
-    /* ★★★ スマホ（画面幅に関わらず）強制2列（2x2）化の極小突破CSS ★★★ */
-    
-    /* 1. 横並び親コンテナの1列化解除 */
-    div[data-testid="stHorizontalBlock"],
-    div[data-testid="column"] {
+    /* 3. スマホ2x2グリッド：画面枠内にぴったり収めて横はみ出し（横スクロール）を防止 */
+    div[data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
         gap: 8px !important;
         width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 
-    /* 2. 各カラム（列）の幅を強制的に50%へ固定 */
     div[data-testid="stColumn"],
     div[data-testid="column"],
     div[data-testid="stHorizontalBlock"] > div {
@@ -46,24 +71,10 @@ def apply_custom_css():
         min-width: calc(50% - 4px) !important;
         max-width: calc(50% - 4px) !important;
         flex: 1 1 calc(50% - 4px) !important;
+        box-sizing: border-box !important;
     }
 
-    /* 3. モバイル画面幅のレスポンシブメディアクエリに対する完全上書き */
-    @media (max-width: 768px) {
-        div[data-testid="stHorizontalBlock"] {
-            flex-direction: row !important;
-            display: flex !important;
-        }
-        div[data-testid="stColumn"],
-        div[data-testid="column"],
-        div[data-testid="stHorizontalBlock"] > div {
-            width: calc(50% - 4px) !important;
-            min-width: calc(50% - 4px) !important;
-            flex: 1 1 calc(50% - 4px) !important;
-        }
-    }
-
-    /* 正方形ボタンのスタイリング */
+    /* 4. 正方形ボタンのスタイリング */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button {
         width: 100% !important;
         aspect-ratio: 1 / 1 !important; /* 正方形 */
@@ -78,6 +89,7 @@ def apply_custom_css():
         align-items: center !important;
         padding: 4px !important;
         transition: all 0.2s ease-in-out !important;
+        box-sizing: border-box !important;
     }
 
     /* ホバー時 */
@@ -88,14 +100,15 @@ def apply_custom_css():
         transform: translateY(-2px) !important;
     }
 
-    /* ボタン内のテキスト（スマホ画面サイズに合わせて文字を自動フィッティング） */
+    /* ボタン内のテキスト（画面幅に合わせて自動縮小） */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button p {
         color: #111827 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
-        font-size: clamp(1.0rem, 4vw, 1.3rem) !important;
+        font-size: clamp(0.95rem, 3.8vw, 1.25rem) !important;
         font-weight: 900 !important;
         line-height: 1.2 !important;
         margin: 0 !important;
+        word-break: break-word !important;
     }
 
     /* 通常ボタン */
@@ -105,15 +118,6 @@ def apply_custom_css():
         border: 2px solid #D1D5DB !important;
         border-radius: 12px !important;
         font-weight: 700 !important;
-    }
-
-    /* コンテナの余白最適化 */
-    .block-container {
-        padding-top: 1.2rem !important;
-        padding-bottom: 2rem !important;
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
-        max-width: 500px !important;
     }
     </style>
     """,
