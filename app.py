@@ -50,7 +50,7 @@ if current_page == "home":
   st.title("🌱 AGRI-CONTAINER")
   st.caption("都市型スマートアグリ遠隔栽培プラットフォーム")
 
-  # 所持コインの表示（DB.get_coins() に統一）
+  # 所持コインの表示
   try:
     coins = DB.get_coins()
   except Exception:
@@ -137,24 +137,24 @@ if current_page == "home":
   )
 
 # ---------------------------------------------------------
-# サブ画面へのルーティング処理
+# サブ画面へのルーティング処理（固有の key を設定してID重複を回避）
 # ---------------------------------------------------------
 elif current_page == "farm":
-  if st.button("← ホームに戻る"):
+  if st.button("← ホームに戻る", key="btn_back_farm"):
     go_home()
   farm.show()
 
 elif current_page == "shop":
-  if st.button("← ホームに戻る"):
+  if st.button("← ホームに戻る", key="btn_back_shop"):
     go_home()
   shop.show()
 
 elif current_page == "inv":
-  if st.button("← ホームに戻る"):
+  if st.button("← ホームに戻る", key="btn_back_inv"):
     go_home()
   inv.show()
 
 elif current_page == "charge":
-  if st.button("← ホームに戻る"):
+  if st.button("← ホームに戻る", key="btn_back_charge"):
     go_home()
   charge.show()
