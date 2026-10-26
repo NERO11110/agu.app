@@ -53,7 +53,7 @@ if current_page == "home":
   st.caption("都市型スマートアグリ遠隔栽培プラットフォーム")
 
   # ユーザー情報・所持コインの表示
-  coins = DB.get_user_coins()
+  coins = DB.get_coins()
   st.info(f"💰 所持コイン: **{coins:,} Coins**")
 
   st.write("")  # 余白
