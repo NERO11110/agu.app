@@ -4,7 +4,12 @@ import streamlit as st
 
 
 def show():
-    st.subheader("🎒 収穫物インベントリ")
+    if st.button("← ホームに戻る", key="inv_back_home"):
+        st.session_state.current_screen = "home"
+        st.rerun()
+
+    st.markdown("<h2 style='margin-top: 10px;'>🎒 収穫物インベントリ（マイバッグ）</h2>",
+                unsafe_allow_html=True)
     st.write("ここであなたが育てて収穫した作物を確認できます。")
 
     if "harvested_crops" not in st.session_state:
@@ -29,9 +34,8 @@ def show():
 
         if st.session_state.passcode is None:
             if st.button("✨ 入場パスワードを発行する"):
-                rand_num = "".join(
-                    random.choice(string.hexdigits.upper()) for _ in range(4)
-                )
+                rand_num = "".join(random.choice(
+                    string.hexdigits.upper()) for _ in range(4))
                 st.session_state.passcode = f"OSAKA-FARM-{rand_num}"
                 st.rerun()
         else:
@@ -41,8 +45,3 @@ def show():
             if st.button("🔄 パスワードを再発行する"):
                 st.session_state.passcode = None
                 st.rerun()
-
-    st.write("---")
-    if st.button("← ホームに戻る", key="inv_back_home"):
-        st.session_state.current_screen = "home"
-        st.rerun()
