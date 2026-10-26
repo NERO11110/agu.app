@@ -1,21 +1,17 @@
-# style.py
 import streamlit as st
 
 
 def apply_custom_css():
-  st.markdown(
-      """
-    <!-- 丸ゴシックフォントの読み込み -->
+    st.markdown(
+        """
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
-    /* 全体背景 */
     html, body, .stApp {
         background-color: #FAFAFA !important;
         font-family: 'Zen Maru Gothic', -apple-system, sans-serif !important;
     }
 
-    /* 文字色・タイトル統一 */
     body, p, span, div, label, .stMarkdown {
         color: #1F2937 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
@@ -28,7 +24,6 @@ def apply_custom_css():
         word-break: break-word !important;
     }
 
-    /* ヘッダー上部余白 */
     header[data-testid="stHeader"] {
         background-color: transparent !important;
     }
@@ -42,7 +37,6 @@ def apply_custom_css():
         margin: 0 auto !important;
     }
 
-    /* 通常ボタンのスタイリング */
     .stButton > button {
         background-color: #FFFFFF !important;
         color: #111827 !important;
@@ -56,5 +50,5 @@ def apply_custom_css():
     }
     </style>
     """,
-      unsafe_allow_html=True,
-  )
+        unsafe_allow_html=True,
+    )
