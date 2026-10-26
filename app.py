@@ -5,6 +5,7 @@ import farm
 import shop
 import inv
 import charge
+import string
 
 # DB初期化
 DB.init_db()

@@ -1,9 +1,10 @@
 import streamlit as st
 import random
+import string
 
 def show():
   
-  st.subheader("🎒 収穫物インベントリ（マイバッグ）")
+  st.subheader("🎒 収穫物インベントリ")
   st.write("ここであなたが育てて収穫した作物を確認できます。")
 
   # 収穫リストが空かどうかチェック
@@ -32,7 +33,7 @@ def show():
     if st.session_state.passcode is None:
       if st.button("✨ 入場パスワードを発行する"):
         # パスワードを自動生成（例：OSAKA-FARM-xxxx）
-        rand_num = random.randint(1000, 9999)
+        rand_num = "".join(random.choice(string.hexdigits) for _ in range(4))
         st.session_state.passcode = f"OSAKA-FARM-{rand_num}"
         st.rerun()
     else:

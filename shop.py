@@ -7,7 +7,7 @@ CROPS = {
         "seed_price": 297,
         "market_price": 330,
         "icon": "🍅",
-        "desc": "鮮度による味が抜群。甘くて美味しい定番です。",
+        "desc": "鮮度による味が抜群。甘くて美味しい定番。",
     },
     "いちご": {
         "seed_price": 540,
@@ -98,6 +98,6 @@ def show():
             st.success(f"{name} の種を購入しました！")
             st.rerun()
           else:
-            st.warning("コインが不足しています！チャージしてください。")
+            st.warning("残高が不足しています！チャージしてください。")
 
       st.write("---")
