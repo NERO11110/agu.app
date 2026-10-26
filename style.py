@@ -9,41 +9,38 @@ def apply_custom_css():
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
-    /* 1. アプリ全体：横スクロールを強制禁止し、縦スクロールのみ許可 */
-    html, body, .stApp, [data-testid="stAppViewContainer"] {
+    /* 1. アプリ全体：横スクロールを絶対禁止 */
+    html, body, .stApp, [data-testid="stAppViewContainer"], .main {
         overflow-x: hidden !important;
         max-width: 100vw !important;
         background-color: #FAFAFA !important;
         font-family: 'Zen Maru Gothic', -apple-system, sans-serif !important;
     }
 
-    /* 2. ヘッダー・タイトルの文字切れ防止＆上部余白の最適化 */
+    /* 2. ヘッダー余白詰めで見切れ防止 */
     header[data-testid="stHeader"] {
         background-color: transparent !important;
     }
     
     .block-container {
-        padding-top: 1.0rem !important;  /* 上部余白を詰めてヘッダーの見切れを防止 */
+        padding-top: 1.0rem !important;
         padding-bottom: 2.0rem !important;
-        padding-left: 0.8rem !important;
-        padding-right: 0.8rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
     }
 
-    /* タイトル（H1〜H3）の文字サイズ動的調整と折り返し許可 */
+    /* タイトルの自動折り返し・縮小 */
     h1, h2, h3 {
         color: #111827 !important;
         font-weight: 900 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
-        word-break: break-word !important;  /* はみ出しによる見切れを防止 */
+        word-break: break-word !important;
         white-space: normal !important;
         line-height: 1.3 !important;
     }
-    
-    h1 { font-size: clamp(1.4rem, 5vw, 2.0rem) !important; }
-    h2 { font-size: clamp(1.2rem, 4.5vw, 1.6rem) !important; }
-    h3 { font-size: clamp(1.05rem, 4vw, 1.3rem) !important; }
+    h1 { font-size: clamp(1.3rem, 5vw, 1.8rem) !important; }
 
     /* 文字色・フォント統一 */
     body, p, span, div, label, .stMarkdown {
@@ -51,8 +48,11 @@ def apply_custom_css():
         font-family: 'Zen Maru Gothic', sans-serif !important;
     }
 
-    /* 3. スマホ2x2グリッド：画面枠内にぴったり収めて横はみ出し（横スクロール）を防止 */
-    div[data-testid="stHorizontalBlock"] {
+    /* ★★★ 3. JavaScript直塗りのインラインスタイル(style=...)を直接ぶち破る極小指定 ★★★ */
+    
+    /* 横並びブロックを強制的に flex-row に維持 */
+    [data-testid="stHorizontalBlock"],
+    div[style*="flex-direction: column"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
@@ -60,24 +60,23 @@ def apply_custom_css():
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
     }
 
-    div[data-testid="stColumn"],
-    div[data-testid="column"],
+    /* カラムの幅をインラインスタイル含めて 50%（半分）に完全強制 */
+    [data-testid="stColumn"],
+    div[style*="width:"],
     div[data-testid="stHorizontalBlock"] > div {
         width: calc(50% - 4px) !important;
         min-width: calc(50% - 4px) !important;
         max-width: calc(50% - 4px) !important;
-        flex: 1 1 calc(50% - 4px) !important;
+        flex: 0 0 calc(50% - 4px) !important;
         box-sizing: border-box !important;
     }
 
     /* 4. 正方形ボタンのスタイリング */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button {
         width: 100% !important;
-        aspect-ratio: 1 / 1 !important; /* 正方形 */
+        aspect-ratio: 1 / 1 !important;
         height: auto !important;
         background-color: #FFFFFF !important;
         border: 2px solid #E5E7EB !important;
@@ -92,19 +91,11 @@ def apply_custom_css():
         box-sizing: border-box !important;
     }
 
-    /* ホバー時 */
-    div.element-container:has(div.square-btn) + div.element-container .stButton > button:hover {
-        border-color: #059669 !important;
-        background-color: #ECFDF5 !important;
-        box-shadow: 0 8px 20px rgba(5, 150, 105, 0.15) !important;
-        transform: translateY(-2px) !important;
-    }
-
-    /* ボタン内のテキスト（画面幅に合わせて自動縮小） */
+    /* ボタン内のテキスト調整 */
     div.element-container:has(div.square-btn) + div.element-container .stButton > button p {
         color: #111827 !important;
         font-family: 'Zen Maru Gothic', sans-serif !important;
-        font-size: clamp(0.95rem, 3.8vw, 1.25rem) !important;
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem) !important;
         font-weight: 900 !important;
         line-height: 1.2 !important;
         margin: 0 !important;
