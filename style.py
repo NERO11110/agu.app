@@ -7,7 +7,7 @@ def apply_custom_css():
     <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
-    /* 全体背景（白〜明るいグレーに完全固定） */
+    /* 全体背景（白〜明るいグレーに固定） */
     html, body, .stApp, [data-testid="stAppViewContainer"] {
         background-color: #F8FAFC !important;
         font-family: 'Zen Maru Gothic', -apple-system, sans-serif !important;
@@ -35,13 +35,13 @@ def apply_custom_css():
         margin: 0 auto !important;
     }
 
-    /* 白枠のカードデザイン */
+    /* 白枠の角丸カードデザイン */
     .custom-card {
         background-color: #FFFFFF !important;
         border: 1px solid #E2E8F0 !important;
         border-radius: 16px !important;
         padding: 16px 20px !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
         margin-bottom: 16px !important;
     }
 
@@ -52,7 +52,7 @@ def apply_custom_css():
         border: 1px solid #CBD5E1 !important;
         border-radius: 14px !important;
         font-weight: 700 !important;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
         transition: all 0.2s ease !important;
         padding: 12px 16px !important;
         width: 100% !important;
@@ -64,7 +64,7 @@ def apply_custom_css():
         background-color: #ECFDF5 !important;
     }
 
-    /* テキスト入力フォーム（暗くならないよう白背景に固定） */
+    /* テキスト入力フォーム（白背景に固定） */
     div[data-baseweb="input"] {
         border-radius: 12px !important;
         background-color: #FFFFFF !important;

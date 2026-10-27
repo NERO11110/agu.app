@@ -36,21 +36,20 @@ CROPS = {
 
 
 def show():
-    st.subheader("🛒 ショップ")
-
     if st.button("← ホームに戻る", key="shop_back_home"):
         st.session_state.current_screen = "home"
         st.rerun()
 
-    st.write("---")
+    st.markdown("<h2 style='margin-top: 10px;'>🛒 ショップ</h2>",
+                unsafe_allow_html=True)
 
     col_balance, col_link = st.columns([2, 1])
 
     with col_balance:
-        st.markdown(f"### 💰 現在の所持コイン: **{st.session_state.coin:,} Coins**")
+        st.markdown(f"### 💰 所持コイン: **{st.session_state.coin:,} Coins**")
 
     with col_link:
-        if st.button("💳 コインをチャージする", use_container_width=True):
+        if st.button("💳 チャージする", use_container_width=True):
             st.session_state.current_screen = "charge"
             st.rerun()
 
@@ -72,7 +71,7 @@ def show():
 
             with col2:
                 st.write(f"価格: **{info['seed_price']} Coins**")
-                st.caption(f"（市場参考価格: ~{info['market_price']} Coins）")
+                st.caption(f"（市場参考: ~{info['market_price']} Coins）")
                 st.write(f"所持数: **{st.session_state[seed_key]} 個**")
 
             with col3:
