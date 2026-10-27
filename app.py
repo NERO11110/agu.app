@@ -72,15 +72,19 @@ if current_page == "home":
     st.markdown(
         """
         <style>
-        .square-btn-container div[data-testid="stForm"] {
-            border: none !important;
-            padding: 0 !important;
+        /* カラムとボタンラッパーの余計な高さを無効化 */
+        div[data-testid="stColumn"] div[data-testid="stButton"] {
+            width: 100% !important;
+            height: auto !important;
         }
-        /* 列内のボタンを1:1正方形に強制 */
-        div[data-testid="column"] .stButton > button {
+
+        /* 1:1 正方形ボタンの強制適用 */
+        div[data-testid="stColumn"] div[data-testid="stButton"] > button {
             width: 100% !important;
             aspect-ratio: 1 / 1 !important;
             height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
             background-color: #FFFFFF !important;
             border: 1px solid #E2E8F0 !important;
             border-radius: 24px !important;
@@ -89,23 +93,36 @@ if current_page == "home":
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
-            font-size: 1.25rem !important;
-            font-weight: 800 !important;
-            color: #0F172A !important;
-            gap: 8px !important;
             padding: 0 !important;
             transition: all 0.2s ease-in-out !important;
         }
-        div[data-testid="column"] .stButton > button:hover {
+
+        /* ホバー時の装飾 */
+        div[data-testid="stColumn"] div[data-testid="stButton"] > button:hover {
             border-color: #10B981 !important;
             background-color: #FFFFFF !important;
             transform: translateY(-3px) !important;
             box-shadow: 0 10px 24px rgba(16, 185, 129, 0.15) !important;
         }
-        div[data-testid="column"] .stButton > button p {
-            font-size: 1.2rem !important;
+
+        /* ボタン内のテキスト・改行領域（Markdown）を崩さない設定 */
+        div[data-testid="stColumn"] div[data-testid="stButton"] > button div[data-testid="stMarkdownContainer"] {
+            height: auto !important;
+            min-height: 0 !important;
+        }
+
+        div[data-testid="stColumn"] div[data-testid="stButton"] > button p {
+            font-size: 1.25rem !important;
             font-weight: 800 !important;
+            color: #0F172A !important;
             margin: 0 !important;
+            line-height: 1.4 !important;
+            text-align: center !important;
+            white-space: pre-line !important;
+        }
+
+        div[data-testid="stColumn"] div[data-testid="stButton"] > button:hover p {
+            color: #10B981 !important;
         }
         </style>
         """,
