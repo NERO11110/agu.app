@@ -65,7 +65,7 @@ def show():
     st.write("")
 
     # 2. 決済方法の選択
-    st.markdown("### 2. 決済方法の選択")
+    st.markdown("### 2. 入金方法の選択")
     pay_method = st.radio(
         "お支払い方法",
         ["クレジットカード", "Apple Pay / Google Pay", "銀行振込・コンビニ決済"],

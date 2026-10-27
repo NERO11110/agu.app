@@ -50,7 +50,7 @@ def show():
     with col_debug:
         debug_mode = st.checkbox("🛠️ デバッグ")
 
-    st.markdown("<h2 style='margin-top: 10px;'>🌾 スマート農業コンテナ・ファーム</h2>",
+    st.markdown("<h2 style='margin-top: 10px;'>🌾 スマート農業コンテナ</h2>",
                 unsafe_allow_html=True)
 
     seeds_status = " | ".join([
