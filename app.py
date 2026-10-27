@@ -41,7 +41,7 @@ if "farms" not in st.session_state or "harvested_crops" not in st.session_state:
 current_page = st.session_state.current_screen
 
 # ---------------------------------------------------------
-# メイン画面（ホーム：2x2グリッドナビゲーション）
+# メイン画面（ホーム：2x2正方形グリッドナビゲーション）
 # ---------------------------------------------------------
 if current_page == "home":
     st.markdown("<h1 style='text-align: center; margin-bottom: 20px;'>🌱 スマートアグリ</h1>",
@@ -60,23 +60,21 @@ if current_page == "home":
 
     st.write("")
 
-    # 2x2 グリッドボタン
-    col1, col2 = st.columns(2)
+    # 2x2 正方形グリッドボタン
+    col1, col2 = st.columns(2, gap="small")
     with col1:
-        if st.button("🌾  ファーム", use_container_width=True, key="nav_farm"):
+        if st.button("🌾\n\nファーム", use_container_width=True, key="nav_farm"):
             st.session_state.current_screen = "farm"
             st.rerun()
-        st.write("")
-        if st.button("🛒  ショップ", use_container_width=True, key="nav_shop"):
+        if st.button("🛒\n\nショップ", use_container_width=True, key="nav_shop"):
             st.session_state.current_screen = "shop"
             st.rerun()
 
     with col2:
-        if st.button("🎒  もちもの", use_container_width=True, key="nav_inv"):
+        if st.button("🎒\n\nもちもの", use_container_width=True, key="nav_inv"):
             st.session_state.current_screen = "inv"
             st.rerun()
-        st.write("")
-        if st.button("💳  チャージ", use_container_width=True, key="nav_charge"):
+        if st.button("💳\n\nチャージ", use_container_width=True, key="nav_charge"):
             st.session_state.current_screen = "charge"
             st.rerun()
 
