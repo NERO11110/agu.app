@@ -41,40 +41,98 @@ if "farms" not in st.session_state or "harvested_crops" not in st.session_state:
 current_page = st.session_state.current_screen
 
 # ---------------------------------------------------------
-# メイン画面（ホーム：2x2正方形グリッドナビゲーション）
+# メイン画面（ホーム：2x2正方形カードレイアウト）
 # ---------------------------------------------------------
 if current_page == "home":
-    st.markdown("<h1 style='text-align: center; margin-bottom: 20px;'>🌱 スマートアグリ</h1>",
+    st.markdown("<h1 style='text-align: center; margin-bottom: 24px; font-size: 1.8rem;'>🌱 スマートアグリ</h1>",
                 unsafe_allow_html=True)
 
-    # 所持コインカード
+    # 所持コインカード（角丸カード）
     st.markdown(
         f"""
-        <div class="custom-card" style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 700; color: #475569;">所持コイン</span>
-            <span style="font-size: 1.25rem; font-weight: 900; color: #0F172A;">{st.session_state.coin:,} <span style="font-size: 0.85rem; font-weight: 500;">yen</span></span>
+        <div style="
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 18px;
+            padding: 18px 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        ">
+            <span style="font-weight: 700; color: #1E293B; font-size: 1.05rem;">所持コイン</span>
+            <span style="font-size: 1.3rem; font-weight: 900; color: #0F172A;">{st.session_state.coin:,} <span style="font-size: 0.85rem; font-weight: 600; color: #475569;">yen</span></span>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-    st.write("")
+    # 正方形ボタン用スタイル注入
+    st.markdown(
+        """
+        <style>
+        .square-btn-container div[data-testid="stForm"] {
+            border: none !important;
+            padding: 0 !important;
+        }
+        /* 列内のボタンを1:1正方形に強制 */
+        div[data-testid="column"] .stButton > button {
+            width: 100% !important;
+            aspect-ratio: 1 / 1 !important;
+            height: auto !important;
+            background-color: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 24px !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: #0F172A !important;
+            gap: 8px !important;
+            padding: 0 !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+        div[data-testid="column"] .stButton > button:hover {
+            border-color: #10B981 !important;
+            background-color: #FFFFFF !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 10px 24px rgba(16, 185, 129, 0.15) !important;
+        }
+        div[data-testid="column"] .stButton > button p {
+            font-size: 1.2rem !important;
+            font-weight: 800 !important;
+            margin: 0 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    # 2x2 正方形グリッドボタン
-    col1, col2 = st.columns(2, gap="small")
+    # 2x2 正方形カード配置
+    col1, col2 = st.columns(2)
     with col1:
-        if st.button("🌾\n\nファーム", use_container_width=True, key="nav_farm"):
+        if st.button("🌾\nファーム", use_container_width=True, key="nav_farm"):
             st.session_state.current_screen = "farm"
             st.rerun()
-        if st.button("🛒\n\nショップ", use_container_width=True, key="nav_shop"):
+
+        st.write("")  # 上下カード間隔
+
+        if st.button("🛒\nショップ", use_container_width=True, key="nav_shop"):
             st.session_state.current_screen = "shop"
             st.rerun()
 
     with col2:
-        if st.button("🎒\n\nもちもの", use_container_width=True, key="nav_inv"):
+        if st.button("🎒\nもちもの", use_container_width=True, key="nav_inv"):
             st.session_state.current_screen = "inv"
             st.rerun()
-        if st.button("💳\n\nチャージ", use_container_width=True, key="nav_charge"):
+
+        st.write("")  # 上下カード間隔
+
+        if st.button("💳\nチャージ", use_container_width=True, key="nav_charge"):
             st.session_state.current_screen = "charge"
             st.rerun()
 
