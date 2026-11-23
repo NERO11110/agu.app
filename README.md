@@ -5,7 +5,8 @@
 
 このアプリはスマートフォンでの仕様を想定しており、PC等でも使用は可能ですがやや体裁が崩れています。
 よければお持ちのスマートフォンで以下のQRコードを読み取りご利用ください。
-<img width="207" height="279" alt="farm" src="https://github.com/user-attachments/assets/b7c4c53e-4af3-43f3-8679-6ad1958a80e1" />
+
+<img width="207" height="279" alt="farm" src="QR_agu.png" />
 
 ---
 
