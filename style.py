@@ -122,6 +122,43 @@ def apply_custom_css():
     div[data-testid="stNotification"] {
         border-radius: 14px !important;
     }
+    /* ========================================================
+       ★ サブ画面（ファーム・ショップなど）の通常ボタンを白に統一
+       ======================================================== */
+    div[data-testid="stButton"] > button {
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+        transition: all 0.2s ease !important;
+    }
+
+    div[data-testid="stButton"] > button p {
+        color: #0F172A !important;
+        font-weight: 700 !important;
+    }
+
+    /* ホバー時のスタイル */
+    div[data-testid="stButton"] > button:hover {
+        border-color: #10B981 !important;
+        background-color: #F0FDF4 !important;
+    }
+
+    div[data-testid="stButton"] > button:hover p {
+        color: #10B981 !important;
+    }
+
+    /* disabled（押せない状態のボタン）も黒くつぶれないようにする */
+    div[data-testid="stButton"] > button:disabled {
+        background-color: #F1F5F9 !important;
+        border-color: #E2E8F0 !important;
+        opacity: 0.7 !important;
+    }
+
+    div[data-testid="stButton"] > button:disabled p {
+        color: #94A3B8 !important;
+    }
     </style>
     """,
         unsafe_allow_html=True,
